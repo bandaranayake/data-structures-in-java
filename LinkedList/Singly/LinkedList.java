@@ -52,7 +52,7 @@ public class LinkedList{
 		if(head==tail){
 			head = tail = null;
 		}
-		else if(head!=null){
+		else{
 			head = head.getNext();
 		}
 	}
@@ -61,7 +61,7 @@ public class LinkedList{
 		if(head==tail){
 			head = tail = null;
 		}
-		else if(tail!=null){
+		else{
 			Node tmp = head;
 			while(tmp.getNext()!=tail){
 				tmp = tmp.getNext();
