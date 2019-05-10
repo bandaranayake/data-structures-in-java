@@ -25,17 +25,17 @@ public class LinkedList{
 	}
 
 	public boolean add(int index, int value){
-		Node newNode = new Node(value);
-		int count = 0;
-		Node tmp = head;
-
 		if(index == 0){
 			addFirst(value);
 			return true;
 		}
 
+		int count = 0;
+		Node tmp = head;
+
 		while(tmp!=null){
 			if(index == ++count){
+				Node newNode = new Node(value);
 				newNode.setNext(tmp.getNext());
 				tmp.setNext(newNode);
 				if(tail==tmp){
@@ -72,19 +72,31 @@ public class LinkedList{
 	}
 
 	public boolean delete(int index){
-		Node tmp = head;
-		int count = 0;
-
 		if(index == 0 && head!=null){
 			deleteFirst();
 			return true;
 		}
+
+		Node tmp = head;
+		int count = 0;
+
 		while(tmp!=null){
 			if(tmp.getNext()!=null && index == ++count){
 				tmp.setNext(tmp.getNext().getNext());
 				if(tmp.getNext()==tail){
 					tail = tmp;
 				}
+				return true;
+			}
+			tmp = tmp.getNext();
+		}
+		return false;
+	}
+
+	public boolean contains(int value){
+		Node tmp = head;
+		while(tmp!=null){
+			if(tmp.getValue() == value){
 				return true;
 			}
 			tmp = tmp.getNext();
