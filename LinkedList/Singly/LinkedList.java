@@ -1,31 +1,29 @@
-public class LinkedList{
+public class LinkedList {
 	private Node head;
 	private Node tail;
 
-	public void addFirst(int value){
+	public void addFirst(int value) {
 		Node newNode = new Node(value);
-		if(head==null){
+		if (head == null) {
 			head = tail = newNode;
-		}
-		else{
+		} else {
 			newNode.setNext(head);
 			head = newNode;
 		}
 	}
 
-	public void addLast(int value){
+	public void addLast(int value) {
 		Node newNode = new Node(value);
-		if(head==null){
+		if (head == null) {
 			head = tail = newNode;
-		}
-		else{
+		} else {
 			tail.setNext(newNode);
 			tail = newNode;
 		}
 	}
 
-	public boolean add(int index, int value){
-		if(index == 0){
+	public boolean add(int index, int value) {
+		if (index == 0) {
 			addFirst(value);
 			return true;
 		}
@@ -33,12 +31,12 @@ public class LinkedList{
 		int count = 0;
 		Node tmp = head;
 
-		while(tmp!=null){
-			if(index == ++count){
+		while (tmp != null) {
+			if (index == ++count) {
 				Node newNode = new Node(value);
 				newNode.setNext(tmp.getNext());
 				tmp.setNext(newNode);
-				if(tail==tmp){
+				if (tail == tmp) {
 					tail = newNode;
 				}
 				return true;
@@ -48,22 +46,20 @@ public class LinkedList{
 		return false;
 	}
 
-	public void deleteFirst(){
-		if(head==tail){
+	public void deleteFirst() {
+		if (head == tail) {
 			head = tail = null;
-		}
-		else{
+		} else {
 			head = head.getNext();
 		}
 	}
 
-	public void deleteLast(){
-		if(head==tail){
+	public void deleteLast() {
+		if (head == tail) {
 			head = tail = null;
-		}
-		else{
+		} else {
 			Node tmp = head;
-			while(tmp.getNext()!=tail){
+			while (tmp.getNext() != tail) {
 				tmp = tmp.getNext();
 			}
 			tmp.setNext(null);
@@ -71,8 +67,8 @@ public class LinkedList{
 		}
 	}
 
-	public boolean delete(int index){
-		if(index == 0 && head!=null){
+	public boolean delete(int index) {
+		if (index == 0 && head != null) {
 			deleteFirst();
 			return true;
 		}
@@ -80,10 +76,10 @@ public class LinkedList{
 		Node tmp = head;
 		int count = 0;
 
-		while(tmp!=null){
-			if(tmp.getNext()!=null && index == ++count){
+		while (tmp != null) {
+			if (tmp.getNext() != null && index == ++count) {
 				tmp.setNext(tmp.getNext().getNext());
-				if(tmp.getNext()==tail){
+				if (tmp.getNext() == tail) {
 					tail = tmp;
 				}
 				return true;
@@ -93,10 +89,10 @@ public class LinkedList{
 		return false;
 	}
 
-	public boolean contains(int value){
+	public boolean contains(int value) {
 		Node tmp = head;
-		while(tmp!=null){
-			if(tmp.getValue() == value){
+		while (tmp != null) {
+			if (tmp.getValue() == value) {
 				return true;
 			}
 			tmp = tmp.getNext();
@@ -104,9 +100,9 @@ public class LinkedList{
 		return false;
 	}
 
-	public void print(){
+	public void print() {
 		Node tmp = head;
-		while(tmp!=null){
+		while (tmp != null) {
 			System.out.print(tmp.getValue() + " ");
 			tmp = tmp.getNext();
 		}
