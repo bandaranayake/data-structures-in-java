@@ -79,15 +79,14 @@ public class LinkedList {
         }
 
         Node tmp = head;
-		int count = 0;
+        int count = 0;
 
-		while (tmp != null) {
-            if(index == count++){
-                if(tmp.getNext()==null){
+        while (tmp != null) {
+            if (index == count++) {
+                if (tmp.getNext() == null) {
                     tmp.getPrev().setNext(null);
                     tail = tmp.getPrev();
-                }
-                else{
+                } else {
                     tmp.getPrev().setNext(tmp.getNext());
                     tmp.getNext().setPrev(tmp.getPrev());
                 }
