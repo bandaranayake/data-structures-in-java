@@ -1,17 +1,24 @@
 public class LinkedList {
     private Node head;
 
+    private Node getTail() {
+        Node tmp = head;
+        if (tmp != null) {
+            while (tmp.getNext() != head) {
+                tmp = tmp.getNext();
+            }
+        }
+        return tmp;
+    }
+
     public void addFirst(int value) {
         Node newNode = new Node(value);
         if (head == null) {
             head = newNode;
             head.setNext(head);
-            head.setPrev(head);
         } else {
             newNode.setNext(head);
-            newNode.setPrev(head.getPrev());
-            head.getPrev().setNext(newNode);
-            head.setPrev(newNode);
+            getTail().setNext(newNode);
             head = newNode;
         }
     }
@@ -21,12 +28,9 @@ public class LinkedList {
         if (head == null) {
             head = newNode;
             head.setNext(head);
-            head.setPrev(head);
         } else {
             newNode.setNext(head);
-            newNode.setPrev(head.getPrev());
-            head.getPrev().setNext(newNode);
-            head.setPrev(newNode);
+            getTail().setNext(newNode);
         }
     }
 
@@ -43,10 +47,7 @@ public class LinkedList {
             do {
                 if (index == ++count) {
                     Node newNode = new Node(value);
-
-                    newNode.setPrev(tmp);
                     newNode.setNext(tmp.getNext());
-                    tmp.getNext().setPrev(newNode);
                     tmp.setNext(newNode);
                     return true;
                 }
@@ -57,21 +58,28 @@ public class LinkedList {
     }
 
     public void deleteFirst() {
-        if (head == head.getNext()) {
-            head = null;
-        } else {
-            head.getNext().setPrev(head.getPrev());
-            head.getPrev().setNext(head.getNext());
-            head = head.getNext();
+        if (head != null) {
+            if (head == head.getNext()) {
+                head = null;
+            } else {
+                getTail().setNext(head.getNext());
+                head = head.getNext();
+            }
         }
     }
 
     public void deleteLast() {
-        if (head == head.getNext()) {
-            head = null;
-        } else {
-            head.getPrev().getPrev().setNext(head);
-            head.setPrev(head.getPrev().getPrev());
+        if (head != null) {
+            if (head == head.getNext()) {
+                head = null;
+            } else {
+                Node tmp = head;
+                Node tail = getTail();
+                while (tmp.getNext() != tail) {
+                    tmp = tmp.getNext();
+                }
+                tmp.setNext(head);
+            }
         }
     }
 
@@ -86,9 +94,8 @@ public class LinkedList {
 
         if (tmp != null) {
             do {
-                if (index == count++) {
-                    tmp.getPrev().setNext(tmp.getNext());
-                    tmp.getNext().setPrev(tmp.getPrev());
+                if (index == ++count) {
+                    tmp.setNext(tmp.getNext().getNext());
                     return true;
                 }
                 tmp = tmp.getNext();
