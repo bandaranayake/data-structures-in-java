@@ -18,6 +18,8 @@ public class Queue {
             front = rear = null;
         } else {
             front = front.getNext();
+            if(front == null)
+                rear = null;
         }
         return tmp.getValue();
     }
